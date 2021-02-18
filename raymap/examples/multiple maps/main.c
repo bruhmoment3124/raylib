@@ -26,13 +26,13 @@ int main(void)
 		/*loads maps*/
         if(m == 0)
         {
-          mapload("maps/map1.txt", 32);
+          loadmap("maps/map1.txt", 32, BLACK);
         } else if(m == 1)
         {
-          mapload("maps/map2.txt", 32);
+          loadmap("maps/map2.txt", 32, BLACK);
         } else if(m == 2)
         {
-          mapload("maps/map3.txt", 32);
+          loadmap("maps/map3.txt", 32, BLACK);
         }
 		
 		/*corrects map loading*/

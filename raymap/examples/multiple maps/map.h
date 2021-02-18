@@ -3,7 +3,38 @@
 #include <raylib.h>
 
 /*loads map from text file and displays it on screen*/
-bool loadmap(char *map, int size, int px, int py, int pw, int ph)
+void loadmap(char *map, int size, Color clr)
+{
+	int c; /*characters in file*/
+	FILE *m = fopen(map, "r"); /*opens map*/
+	int x = 0, y = 0; /*X position and Y position*/
+	
+	while((c = fgetc(m)) != EOF)
+	{
+		/*whitespace*/
+		if(c == '-')
+    {
+			x = 0;
+      y += size;
+    }
+
+    if(c == '.')
+		{
+    	x += size;
+		}
+
+		/*ground*/
+    if(c == '#')
+    {
+			DrawRectangle(x, y, size, size, clr);
+      x += size;
+		}
+	}	
+	fclose(m);
+}
+
+/*map collision function (this function is simmilar to the loadmap function, just used in a different context)*/
+bool collidemap(char *map, int size, int px, int py, int pw, int ph)
 {
 	int c; /*characters in file*/
 	FILE *m = fopen(map, "r"); /*opens map*/
@@ -35,9 +66,8 @@ bool loadmap(char *map, int size, int px, int py, int pw, int ph)
 					{
 					collide = true;
 			}
-			
-			DrawRectangle(x, y, size, size, BLACK);
-      x += size;
+      
+			x += size;
 		}
 	}	
 	fclose(m);
